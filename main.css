@@ -1,0 +1,64 @@
+
+body{
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrapper{
+    width: 60%;
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title{
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.book__group{
+    display: grid;
+    grid-template: 1fr 1fr/1fr 1fr 1fr 1fr;
+    gap:1.5rem;
+
+}
+
+.book__cover{
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+
+.title__frame{
+    margin-left: 1.5rem;
+}
+.cover__title{
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    color:aliceblue;
+}
+
+.cover__author{
+    font-size: 15px;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+}
+
+
+.book__line{
+    position:absolute;
+    height: 18rem;
+    width: .2rem;
+    background-color: rgb(111, 108, 108);
+    left:.7rem;
+    
+}
+.popup__book__details{
+    display: none;
+}

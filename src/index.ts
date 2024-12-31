@@ -1,6 +1,8 @@
 
-// import { bookData} from './module'
- interface Book{
+
+// create interface Book for further use in function
+
+interface Book{
     id:number;
     title:string;
     author:string;
@@ -12,17 +14,13 @@
     color:string;
 }
 
- const bookData=():Promise<Book[]>=>
-    fetch("https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books", {method:"GET"})
-    .then(res=>res.json())
-    .then((data:Book[])=>{
-        return data
-    })
+
+// create all elements will be used in function. use as htmlelements to make them into htmlelements
 
 const bookGroup=document.querySelector(".book__group") as HTMLElement;
 
 const popupBookDetails=document.querySelector(".popup__book__details") as HTMLElement;
-const popupBookFrame=document.querySelector(".book-frame") as HTMLElement;
+const popupBookFrame=document.querySelector(".book__frame") as HTMLElement;
 const popupBookTitle=document.querySelector(".book__title") as HTMLElement;
 const popupBookAuthor=document.querySelector(".book__author") as HTMLElement;
 const detailBookName=document.querySelector(".detail__name") as HTMLElement;
@@ -34,25 +32,47 @@ const detailBookPageNumber=document.querySelector(".pages") as HTMLElement;
 const detialBookPublisher=document.querySelector(".publisher") as HTMLElement;
 
 
+const returnBtn=document.querySelector(".return__button") as HTMLElement;
+
+
+// fetch data through API
+
+const bookData=():Promise<Book[]>=>
+    fetch("https://my-json-server.typicode.com/zocom-christoffer-wallenberg/books-api/books", {method:"GET"})
+    .then(res=>res.json())
+    .then((data:Book[])=>{
+        return data
+    })
 
 // using article index cannot get the right elements because the article elements 
 // have not been yet created with typescript. I need to use query selectAll to generate
 // an array to loop through all elements.
 
-const bookOne=document.getElementsByTagName("article")[0] as HTMLElement;
-const bookTwo=document.getElementsByTagName("article")[1] as HTMLElement;
-const bookThree=document.getElementsByTagName("article")[2] as HTMLElement;
-const bookFour=document.getElementsByTagName("article")[3] as HTMLElement;
-const bookFive=document.getElementsByTagName("article")[4] as HTMLElement;
-const bookSix=document.getElementsByTagName("article")[5] as HTMLElement;
-const bookSeven=document.getElementsByTagName("article")[6] as HTMLElement;
-const bookEight=document.getElementsByTagName("article")[7] as HTMLElement;
-
-const returnBtn=document.querySelector(".return__button") as HTMLElement;
+// create getBookInfo function using Book as parameter to return all information of one specific book
 
 
+const getBookInfo=(book:Book)=> {
+    const backgroundColor=book.color
+    const upperColor="white";
+    popupBookFrame.style.background=`linear-gradient(45deg,${backgroundColor} 75%, ${upperColor} 100%)`
+    popupBookTitle.textContent=book.title;
+    popupBookAuthor.textContent=book.author;
+    detailBookName.textContent=book.title;
+    detailBookAuthor.textContent+=book.author;
+    detailBookAbstract.textContent=book.plot;
+    detailBookAudience.textContent+=book.audience;
+
+    const bookYear=book.year;
+    detailBookPublishInfo.textContent+=String(bookYear);
+
+    const bookPages=book.pages;
+    detailBookPageNumber.textContent+=String(bookPages);
+
+    detialBookPublisher.textContent+=book.publisher;  
+}
 
 
+// use then and forEach to loop data fetched from API and create HTML elements on main page of each book
    bookData().then(books=>{
     books.forEach(book=>{
         const bookEl=document.createElement("article");
@@ -78,6 +98,7 @@ const returnBtn=document.querySelector(".return__button") as HTMLElement;
 
         bookEl.addEventListener("click", () => {
             getBookInfo(book);
+            popupBookDetails.style.display="block";
         });
     });
 });
@@ -85,28 +106,7 @@ const returnBtn=document.querySelector(".return__button") as HTMLElement;
 
 
 
-const getBookInfo=(book:Book)=> {
-    const backgroundColor=book.color
-    const upperColor="white";
-    popupBookFrame.style.background=`linear-gradient(45deg,${backgroundColor} 75%, ${upperColor} 100%)`
-    popupBookTitle.textContent=book.title;
-    popupBookAuthor.textContent=book.author;
-    detailBookName.textContent=book.title;
-    detailBookAuthor.textContent=book.author;
-    detailBookAbstract.textContent=book.plot;
-    detailBookAudience.textContent=book.audience;
-
-    const bookYear=book.year;
-    detailBookPublishInfo.textContent=String(bookYear);
-
-    const bookPages=book.pages;
-    detailBookPageNumber.textContent=String(bookPages);
-
-    detialBookPublisher.textContent=book.publisher;  
-}
-
-
-
+// reset popup detail page when click return button
 
 const reset=()=>{
     popupBookTitle.innerHTML="";
@@ -120,6 +120,8 @@ const reset=()=>{
     detialBookPublisher.innerHTML=""; 
 }
 
+
+
 returnBtn.addEventListener("click",()=>{
     popupBookDetails.style.display="none";
     reset();
@@ -129,42 +131,3 @@ returnBtn.addEventListener("click",()=>{
 
 
 
-// bookOne.addEventListener("click",()=>{
-//     getBookInfo(0);
-//     popupBookDetails.style.display="block";
-// })
-
-// bookTwo.addEventListener("click",()=>{
-//     getBookInfo(1);
-//     popupBookDetails.style.display="block";
-// })
-
-// bookThree.addEventListener("click",()=>{
-//     getBookInfo(2);
-//     popupBookDetails.style.display="block";
-// })
-
-// bookFour.addEventListener("click",()=>{
-//     getBookInfo(3);
-//     popupBookDetails.style.display="block";
-// })
-
-// bookFive.addEventListener("click",()=>{
-//     getBookInfo(4);
-//     popupBookDetails.style.display="block";
-// })
-
-// bookSix.addEventListener("click",()=>{
-//     getBookInfo(5);
-//     popupBookDetails.style.display="block";
-// })
-
-// bookSeven.addEventListener("click",()=>{
-//     getBookInfo(6);
-//     popupBookDetails.style.display="block";
-// })
-
-// bookEight.addEventListener("click",()=>{
-//     getBookInfo(7);
-//     popupBookDetails.style.display="block";
-// })

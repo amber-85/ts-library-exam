@@ -84,28 +84,49 @@ body{
 
 .book__frame{
     grid-column: 1/span 1;
-    width: 27rem;   
+    width: 25rem;   
     display: flex;
     flex-direction: column;
     justify-content: end;
+    position:relative;
 }
 
+.popup__book__line{
+    position:absolute;
+    height: 100%;
+    width: .2rem;
+    background-color: rgb(111, 108, 108);
+    left:.7rem;
+}
+.book__title{
+    font-size: 30px;
+    color: rgb(33, 33, 33);
+    font-weight: 600;
+    margin-left: 5%;
+}
+
+.book__author{
+    font-size: 20px;
+    color:  rgb(33, 33, 33);
+    margin-left: 5%;
+}
 
 .book__intro{
     grid-column: auto/span 1;
     display: grid;
-    grid-template-rows: 8rem 1fr 1fr 5rem;
+    grid-template-rows: 8rem 1fr 7rem 5rem;
+    align-content: flex-start;
 }
 
-.book__title{
+.detail__name{
+    font-size: 30px;
+    font-weight: 600;
+    color: aliceblue;
+}
+
+.detail__author{
     font-size: 20px;
-    color: rgb(113, 112, 112);
-    font-weight: 400;
-}
-
-.book__author{
-    font-size: 15px;
-    color: rgb(113, 112, 112);
+    color: aliceblue;
 }
 
 .abstract{
@@ -118,6 +139,9 @@ body{
     grid-template: 1fr 1fr/1fr 1fr;
     font-size: 15px;
     color: aliceblue;
+    background-color: rgb(45, 44, 44);
+    justify-items: center;
+
 }
 
 

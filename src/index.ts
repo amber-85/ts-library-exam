@@ -128,6 +128,27 @@ returnBtn.addEventListener("click",()=>{
 })
 
 
+const inputResult=document.querySelector(".input__frame") as HTMLInputElement;
+const userSearchBtn=document.querySelector(".input__button") as HTMLButtonElement;
 
+const searchBook=()=>{
+    if (inputResult){
+        const searchResult:string=inputResult.value;
+        bookData().then(books=>{
+            const mappingBook=books.find(book=>
+                book.title.toLowerCase()==searchResult.toLowerCase());
+
+                if(mappingBook){
+                        getBookInfo(mappingBook);
+                        popupBookDetails.style.display="block";
+                    }
+                else{
+                    console.log("No matching book foun.");   
+                };
+        });
+    }
+}
+    
+userSearchBtn.addEventListener("click",searchBook);
 
 

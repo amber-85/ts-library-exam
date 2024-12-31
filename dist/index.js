@@ -85,3 +85,22 @@ returnBtn.addEventListener("click", () => {
     popupBookDetails.style.display = "none";
     reset();
 });
+const inputResult = document.querySelector(".input__frame");
+const userSearchBtn = document.querySelector(".input__button");
+const searchBook = () => {
+    if (inputResult) {
+        const searchResult = inputResult.value;
+        bookData().then(books => {
+            const mappingBook = books.find(book => book.title.toLowerCase() == searchResult.toLowerCase());
+            if (mappingBook) {
+                getBookInfo(mappingBook);
+                popupBookDetails.style.display = "block";
+            }
+            else {
+                console.log("No matching book foun.");
+            }
+            ;
+        });
+    }
+};
+userSearchBtn.addEventListener("click", searchBook);

@@ -13,11 +13,29 @@ body{
 
 }
 
+
+
 .title{
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
 }
+
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#input__frame{
+    padding:.5rem 1rem;
+}
+
+.input__button{
+    font-size: 15px;
+    padding:.5rem 1rem
+}
+
+
 
 .book__group{
     display: grid;

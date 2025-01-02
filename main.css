@@ -158,7 +158,8 @@ body{
     font-size: 15px;
     color: aliceblue;
     background-color: rgb(45, 44, 44);
-    justify-items: center;
+    justify-items: flex-start;
+    padding:.5rem 1rem;
 
 }
 
@@ -169,6 +170,5 @@ body{
     height: fit-content;
     padding:.5rem 1rem;
     font-size:15px;
-    justify-self: center;
     align-self: flex-end;
 }

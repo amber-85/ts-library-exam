@@ -31,14 +31,14 @@ const getBookInfo = (book) => {
     popupBookTitle.textContent = book.title;
     popupBookAuthor.textContent = book.author;
     detailBookName.textContent = book.title;
-    detailBookAuthor.textContent += book.author;
+    detailBookAuthor.textContent = "By" + " " + book.author;
     detailBookAbstract.textContent = book.plot;
-    detailBookAudience.textContent += book.audience;
+    detailBookAudience.textContent = "Audience:" + "" + book.audience;
     const bookYear = book.year;
-    detailBookPublishInfo.textContent += String(bookYear);
+    detailBookPublishInfo.textContent = "First Published:" + String(bookYear);
     const bookPages = book.pages;
-    detailBookPageNumber.textContent += String(bookPages);
-    detialBookPublisher.textContent += book.publisher;
+    detailBookPageNumber.textContent = "Pages:" + String(bookPages);
+    detialBookPublisher.textContent = "Publisher" + book.publisher;
 };
 // use then and forEach to loop data fetched from API and create HTML elements on main page of each book
 bookData().then(books => {
@@ -71,36 +71,37 @@ bookData().then(books => {
 });
 // reset popup detail page when click return button
 const reset = () => {
-    popupBookTitle.innerHTML = "";
-    popupBookAuthor.innerHTML = "";
-    detailBookName.innerHTML = "";
-    detailBookAuthor.innerHTML = "";
-    detailBookAbstract.innerHTML = "";
-    detailBookAudience.innerHTML = "";
-    detailBookPublishInfo.innerHTML = "";
-    detailBookPageNumber.innerHTML = "";
-    detialBookPublisher.innerHTML = "";
+    popupBookTitle.textContent = "";
+    popupBookAuthor.textContent = "";
+    detailBookName.textContent = "";
+    detailBookAuthor.textContent = "By" + " ";
+    detailBookAbstract.textContent = "";
+    detailBookAudience.textContent = "Audience:";
+    detailBookPublishInfo.textContent = "First Published:";
+    detailBookPageNumber.textContent = "Pages:";
+    detialBookPublisher.textContent = "Publisher:";
 };
 returnBtn.addEventListener("click", () => {
     popupBookDetails.style.display = "none";
     reset();
 });
-const inputResult = document.querySelector(".input__frame");
-const userSearchBtn = document.querySelector(".input__button");
-const searchBook = () => {
-    if (inputResult) {
-        const searchResult = inputResult.value;
-        bookData().then(books => {
-            const mappingBook = books.find(book => book.title.toLowerCase() == searchResult.toLowerCase());
-            if (mappingBook) {
-                getBookInfo(mappingBook);
-                popupBookDetails.style.display = "block";
-            }
-            else {
-                console.log("No matching book foun.");
-            }
-            ;
-        });
-    }
-};
-userSearchBtn.addEventListener("click", searchBook);
+// search function doesn't work, I cannot find why. will need more check
+// const inputResult=document.querySelector(".input__frame") as HTMLInputElement;
+// const userSearchBtn=document.querySelector(".input__button") as HTMLButtonElement;
+// const searchBook=()=>{
+//     if (inputResult){
+//         const searchResult:string=inputResult.value;
+//         bookData().then(books=>{
+//             const book=books.find(book=>
+//                 book.title.toLowerCase()==searchResult.toLowerCase());
+//                 if(book){
+//                         getBookInfo(book);
+//                         popupBookDetails.style.display="block";
+//                     }
+//                 else{
+//                     console.log("No matching book foun.");   
+//                 };
+//         });
+//     }
+// }
+// userSearchBtn.addEventListener("click",searchBook);
